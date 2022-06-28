@@ -79,10 +79,10 @@ function animate() {
     pH
     );
 
-  if (keys.w.pressed || keys.ArrowUp.pressed) background.position.y = background.position.y + 3;
-  else if (keys.a.pressed || keys.ArrowLeft.pressed) background.position.x = background.position.x + 3;
-  else if (keys.s.pressed || keys.ArrowDown.pressed) background.position.y = background.position.y - 3;
-  else if (keys.d.pressed || keys.ArrowRight.pressed) background.position.x = background.position.x - 3;
+  if (keys.w.pressed || keys.ArrowUp.pressed) background.position.y += 3;
+  else if (keys.a.pressed || keys.ArrowLeft.pressed) background.position.x += 3;
+  else if (keys.s.pressed || keys.ArrowDown.pressed) background.position.y -= 3;
+  else if (keys.d.pressed || keys.ArrowRight.pressed) background.position.x -= 3;
 }
 animate();
 
@@ -125,7 +125,6 @@ window.addEventListener('keydown', (e) => {
     default:
       break;
   }
-  console.log(keys);
 })
 
 window.addEventListener('keyup', (e) => {
@@ -167,5 +166,4 @@ window.addEventListener('keyup', (e) => {
     default:
       break;
   }
-  console.log(keys);
 })
