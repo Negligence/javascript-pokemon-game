@@ -3,7 +3,7 @@ const context = canvas.getContext('2d');
 
 let cW = canvas.width = 1024;
 let cH = canvas.height = 576;
-let speed = 1.5;
+let speed = 3;
 
 // context.fillStyle = 'white';
 // context.fillRect(0, 0, cW, cH);
