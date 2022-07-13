@@ -72,7 +72,7 @@ playerRightImage.src = './img/player-right.png';
 
 let pW = playerDownImage.width;
 let pH = playerDownImage.height;
-  
+
   const player = new Sprite({
     position: {
       x: cW / 2 - 192 / 4 / 2,
