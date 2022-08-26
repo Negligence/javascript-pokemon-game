@@ -192,7 +192,7 @@ function animate() {
   if (battle.initiated) return;
 
   // #region Activate a Battle
-  if (keys.w.pressed || keys.ArrowUp.pressed || keys.a.pressed || keys.ArrowLeft.pressed || keys.s.pressed || keys.ArrowDown.pressed || keys.d.pressed || keys.ArrowRight.pressed) {
+  if (keys.w.pressed || keys.ArrowUp.pressed || keys.a.pressed || keys.ArrowLeft.pressed || keys.s.pressed || keys.ArrowDown.pressed || keys.d.pressed || keys.ArrowRight.pressed || keys.TouchUp.pressed || keys.TouchRight.pressed || keys.TouchDown.pressed || keys.TouchLeft.pressed ) {
     for (let i = 0; i < battleZones.length; i++) {
       const battleZone = battleZones[i];
       const overlappingArea = (Math.min(player.position.x + player.width, battleZone.position.x + battleZone.width) - Math.max(player.position.x, battleZone.position.x)) * (Math.min(player.position.y + player.height, battleZone.position.y + battleZone.height) - Math.max(player.position.y, battleZone.position.y));
