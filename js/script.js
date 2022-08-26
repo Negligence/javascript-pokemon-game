@@ -203,20 +203,28 @@ function animate() {
         window.cancelAnimationFrame(animationId);
 
         battle.initiated = true;
-        gsap.to(`div:first-child`, {
+        gsap.to(`div > div`, {
           opacity:1,
           repeat:3,
           yoyo: true,
           duration: 0.4,
           onComplete() {
-            gsap.to(`div:first-child`, {
+            gsap.to(`div > div`, {
               opacity:1,
               duration: 0.4,
+              onComplete () {
+                // activate a new animation loop
+                animateBattle();
+                gsap.to(`div > div`, {
+                  opacity:0,
+                  duration: 0.4,
+                });
+              }
             });
+            
 
-            // activate a new animation loop
 
-
+            
           }
         });
       }      
@@ -333,7 +341,25 @@ function animate() {
   })}
 
 }
-animate();
+// animate();
+
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = `./img/battle-background.png`;
+
+const battleBackground = new Sprite({
+  position: {
+    x: 0,
+    y: 0
+  },
+  image: battleBackgroundImage
+});
+
+function animateBattle() {
+  window.requestAnimationFrame(animateBattle)
+  battleBackground.draw();
+}
+
+animateBattle();
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {
