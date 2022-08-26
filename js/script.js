@@ -1,5 +1,6 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
+// console.log(gsap);
 
 let cW = canvas.width = 1024;
 let cH = canvas.height = 576;
@@ -163,6 +164,10 @@ function rectangularCollision({rectangle1, rectangle2}) {
   );
 }
 
+const battle = {
+  initiated: false,
+};
+
 function animate() {
   window.requestAnimationFrame(animate);
   background.draw();
@@ -179,22 +184,41 @@ function animate() {
   player.draw();
   foreground.draw();
 
+  let moving = true;
+  player.moving = false;
+  
+  if (battle.initiated) return;
+
+  // #region Activate a Battle
   if (keys.w.pressed || keys.ArrowUp.pressed || keys.a.pressed || keys.ArrowLeft.pressed || keys.s.pressed || keys.ArrowDown.pressed || keys.d.pressed || keys.ArrowRight.pressed) {
     for (let i = 0; i < battleZones.length; i++) {
       const battleZone = battleZones[i];
       const overlappingArea = (Math.min(player.position.x + player.width, battleZone.position.x + battleZone.width) - Math.max(player.position.x, battleZone.position.x)) * (Math.min(player.position.y + player.height, battleZone.position.y + battleZone.height) - Math.max(player.position.y, battleZone.position.y));
 
-      if (rectangularCollision({rectangle1: player, rectangle2: battleZone}) && overlappingArea > (player.width * player.height) / 2 && Math.random() < 0.01) {
-        console.log(`collisioin!`);
+      if (rectangularCollision({rectangle1: player, rectangle2: battleZone}) && overlappingArea > (player.width * player.height) / 2 && Math.random() < 0.05) {
+        console.log(`collision!`);
+        battle.initiated = true;
+        gsap.to(`div:first-child`, {
+          opacity:1,
+          repeat:3,
+          yoyo: true,
+          duration: 0.4,
+          onComplete() {
+            gsap.to(`div:first-child`, {
+              opacity:1,
+              duration: 0.4,
+            });
 
-        break;
+            // activate a new animation loop
+
+            // deactivate current animation loop
+          }
+        });
       }      
     }
   }
-  
-  let moving = true;
-  player.moving = false;
-  
+  // #endregion Activate a Battle
+
   if (keys.w.pressed && lastKey === 'w' || keys.ArrowUp.pressed && lastKey === 'ArrowUp' || keys.TouchUp.pressed && lastKey === `TouchUp`) {
     for (let i = 0; i < boundaries.length; i++) {
       player.moving = true;
