@@ -187,6 +187,7 @@ function animate() {
   let moving = true;
   player.moving = false;
   
+  // console.log(animationId);
   if (battle.initiated) return;
 
   // #region Activate a Battle
@@ -196,11 +197,11 @@ function animate() {
       const overlappingArea = (Math.min(player.position.x + player.width, battleZone.position.x + battleZone.width) - Math.max(player.position.x, battleZone.position.x)) * (Math.min(player.position.y + player.height, battleZone.position.y + battleZone.height) - Math.max(player.position.y, battleZone.position.y));
 
       if (rectangularCollision({rectangle1: player, rectangle2: battleZone}) && overlappingArea > (player.width * player.height) / 2 && Math.random() < 0.05) {
-        console.log(`collision!`);
+        console.log(`Activate Battle!`);
 
         // deactivate current animation loop
         window.cancelAnimationFrame(animationId);
-        
+
         battle.initiated = true;
         gsap.to(`div:first-child`, {
           opacity:1,
