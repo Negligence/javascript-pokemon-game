@@ -169,7 +169,7 @@ const battle = {
 };
 
 function animate() {
-  window.requestAnimationFrame(animate);
+  const animationId = window.requestAnimationFrame(animate);
   background.draw();
   boundaries.forEach(boundary => {
     boundary.draw();
@@ -197,6 +197,10 @@ function animate() {
 
       if (rectangularCollision({rectangle1: player, rectangle2: battleZone}) && overlappingArea > (player.width * player.height) / 2 && Math.random() < 0.05) {
         console.log(`collision!`);
+
+        // deactivate current animation loop
+        window.cancelAnimationFrame(animationId);
+        
         battle.initiated = true;
         gsap.to(`div:first-child`, {
           opacity:1,
@@ -211,7 +215,7 @@ function animate() {
 
             // activate a new animation loop
 
-            // deactivate current animation loop
+
           }
         });
       }      
