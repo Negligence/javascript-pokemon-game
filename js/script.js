@@ -517,4 +517,3 @@ document.addEventListener('touchend', handleTouchEnd, false);
 
 addEventListener(`click`, playAudio);
 addEventListener(`keydown`, playAudio);
-addEventListener(`touchStart`, playAudio);
