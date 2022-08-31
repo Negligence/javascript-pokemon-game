@@ -204,19 +204,20 @@ function animate() {
         window.cancelAnimationFrame(animationId);
 
         battle.initiated = true;
-        gsap.to(`div > div`, {
+        gsap.to(`#overlapping-div`, {
           opacity:1,
           repeat:3,
           yoyo: true,
           duration: 0.4,
           onComplete() {
-            gsap.to(`div > div`, {
+            gsap.to(`#overlapping-div`, {
               opacity:1,
               duration: 0.4,
               onComplete () {
                 // activate a new animation loop
+                initBattle();
                 animateBattle();
-                gsap.to(`div > div`, {
+                gsap.to(`#overlapping-div`, {
                   opacity:0,
                   duration: 0.4,
                 });
@@ -344,65 +345,6 @@ function animate() {
 }
 animate();
 
-const battleBackgroundImage = new Image();
-battleBackgroundImage.src = `./img/battle-background.png`;
-
-const battleBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0
-  },
-  image: battleBackgroundImage
-});
-
-const draggleImage = new Image();
-draggleImage.src = `./img/draggle-sprite.png`;
-
-const draggle = new Sprite({
-  position: {
-    x: 800,
-    y: 100,
-  },
-
-  image: draggleImage,
-
-  frames: {
-    max: 4,
-    hold: 30,
-  },
-
-  animate: true,
-  
-});
-
-const embyImage = new Image();
-embyImage.src = `./img/emby-sprite.png`;
-
-const emby = new Sprite({
-  position: {
-    x: 280,
-    y: 325,
-  },
-
-  image: embyImage,
-
-  frames: {
-    max: 4,
-    hold: 30,
-  },
-
-  animate: true,
-  
-});
-
-function animateBattle() {
-  window.requestAnimationFrame(animateBattle)
-  battleBackground.draw();
-  draggle.draw();
-  emby.draw();
-}
-
-// animateBattle();
 
 let lastKey = '';
 window.addEventListener('keydown', (e) => {

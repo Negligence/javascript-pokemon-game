@@ -3,6 +3,7 @@ html {
   width: 100%;
   height: 100%;
 }
+
 *,*::before,*::after {box-sizing: inherit;}
 
 body {
@@ -13,7 +14,10 @@ body {
   place-items: center;
   width: 100%;
   height: 100%;
+  font-family: 'Press Start 2P', cursive;
 }
+
+body, h1, h2, h3, h4, h5, h6, p {margin: 0;}
 
 canvas {
   object-fit: contain;
