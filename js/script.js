@@ -203,6 +203,10 @@ function animate() {
         // deactivate current animation loop
         window.cancelAnimationFrame(animationId);
 
+        audio.Map.stop();
+        audio.InitBattle.play();
+        audio.Battle.play();
+
         battle.initiated = true;
         gsap.to(`#overlapping-div`, {
           opacity:1,
@@ -498,6 +502,19 @@ function handleTouchEnd () {
   keys.TouchDown.pressed = false;
 }
 
+let clicked = false;
+
+function playAudio() {
+  if (!clicked) {
+    audio.Map.play();
+    clicked = true;
+  }
+}
+
 document.addEventListener('touchstart', handleTouchStart, false);        
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
+
+addEventListener(`click`, playAudio);
+addEventListener(`keydown`, playAudio);
+addEventListener(`touchStart`, playAudio);

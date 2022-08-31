@@ -54,6 +54,8 @@ function initBattle() {
       if (draggle.health <= 0) {
         queue.push(() => {
           draggle.faint();
+          audio.Battle.stop();
+          audio.Victory.play();
         });
 
         queue.push(() => {
@@ -70,6 +72,7 @@ function initBattle() {
               });
 
               battle.initiated = false;
+              audio.Map.play();
             }
           });
         });
@@ -88,6 +91,7 @@ function initBattle() {
         if (emby.health <= 0) {
           queue.push(() => {
             emby.faint();
+            audio.Battle.stop();
           });
 
           queue.push(() => {
@@ -104,6 +108,7 @@ function initBattle() {
                 });
 
                 battle.initiated = false;
+                audio.Map.play();
               },
             });
           });

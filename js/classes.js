@@ -109,6 +109,7 @@ class Monster extends Sprite {
     
     switch (attack.name) {
       case `Fireball`:
+        audio.InitFireball.play();
         const fireballImage = new Image();
         fireballImage.src = `./img/fireball.png`;
 
@@ -137,6 +138,7 @@ class Monster extends Sprite {
           y: recipient.position.y,
           onComplete: () => {
              // Enemy actually gets hit
+             audio.FireballHit.play();
              gsap.to(healthBar, {
               width: `${recipient.health}%`,
             })
@@ -174,6 +176,7 @@ class Monster extends Sprite {
           duration: 0.1,
           onComplete: () => {
             // Enemy actually gets hit
+            audio.TackleHit.play();
             gsap.to(healthBar, {
               width: `${recipient.health}%`,
             })
